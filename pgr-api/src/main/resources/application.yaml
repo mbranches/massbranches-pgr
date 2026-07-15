@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: pgr-api
+  profiles:
+    active: ${ENV_SPRING_PROFILE:default}
+  config:
+    import:  optional:classpath:.env[.properties]
+  datasource:
+    url: ${ENV_DB_URL}
+    username: ${ENV_DB_USERNAME:root}
+    password: ${ENV_DB_PASSWORD:123456}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: ${ENV_JPA_SHOW_SQL:true}
+    format-sql: ${ENV_JPA_FORMAT_SQL:true}
+jwt:
+  secret: ${ENV_JWT_SECRET:random-secret-key}
+  expiration: ${ENV_JWT_EXPIRATION_MS:3600000} # 1 hour in milliseconds
+
+refresh-token:
+  expiration: ${ENV_REFRESH_TOKEN_EXPIRATION_MS:86400000} # 24 hours in milliseconds
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
